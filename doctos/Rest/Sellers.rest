@@ -1,0 +1,74 @@
+### Agregar admionistrador
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Administrador del sistema GDL-PLACE",
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026",
+  "role": "ADMIN"
+}
+
+### Login y obtención del token
+POST http://localhost:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026"
+}
+
+### Agregar usuario
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Zulema Barragán Ríos",
+  "email": "zulema.barragan@gmail.com",
+  "password": "KarenRene",
+  "role": "BUYER"
+}
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Marco Antonio González Solis",
+  "email": "dicomys@hotmail.com",
+  "password": "Olga0322",
+  "role": "ADMIN"
+}
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/sellers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MzU5Njk3OCwiZXhwIjoxNzczNjA0MTc4fQ.btGN6lXMrgkgpFLuXm6MdODyJL95IThvXwv0HfnZWnA
+
+{
+  "bussines_name": "Cafe Central",
+  "owner_name": "Juan Perez",
+  "email": "cafe@mail.com",
+  "password": "12345678",
+  "address": "Av Juarez 120",
+  "phone": "3312345678",
+  "city": "Guadalajara",
+  "category": "Cafeteria",
+  "description": "Café artesanal"
+}
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/sellers
+Content-Type: application/json
+
+{
+  "businessName": "Cafe Central",
+  "ownerName": "Juan Perez",
+  "email": "cafe@mail.com",
+  "address": "Av Juarez 120",
+  "phone": "3312345678",
+  "city": "Guadalajara",
+  "category": "Cafeteria",
+  "description": "Café artesanal",
+  "password": "12345678"
+}
