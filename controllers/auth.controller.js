@@ -1,6 +1,17 @@
-const pool = require("../config/db");
+// const pool = require("../config/db");
+const { Pool } = require('pg');
 const jwt = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../utils/hash");
+require('dotenv').config();
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false, // necesario para conexiones SSL en Neon
+    },
+});
+
+module.exports = pool;
 
 const register = async (req, res) => {
 

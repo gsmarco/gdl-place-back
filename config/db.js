@@ -1,13 +1,16 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const pool = new Pool({
-    user: 'neondb_owner',
-    host: 'ep-patient-brook-ai2qdtp3-pooler.c-4.us-east-1.aws.neon.tech',
-    database: 'neondb',
-    password: 'npg_IUFih1jy6cQZ',
-    port: 5432
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false, // necesario para conexiones SSL en Neon
+    },
 });
 
+
+// const pool = require("../config/db");
+// const { Pool } = require('pg');
 // const pool = new Pool({
 //     user: 'postgres',
 //     host: 'localhost',
