@@ -1,0 +1,95 @@
+### Backend Remoto
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026"
+}
+
+### Backend local
+### Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026"
+}
+
+### Agregar administrador
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Administrador del sistema GDL-PLACE",
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026",
+  "role": "admin"
+}
+
+### Agregar cuenta de invitado
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Cuenta de invitado",
+  "email": "guest@gdlplace.com",
+  "password": "guest",
+  "role": "buyer"
+}
+
+### Agregar producto
+POST http://127.0.0.1:3000/api/Products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MjUxNTUwLCJleHAiOjE3NzQyNTg3NTB9.pf8Kd1DwbaKFer-CnpLUU9BVU7nlZwH9ydhCKqD_cO0
+Content-Type: application/json
+
+{
+  "name": "Cafe Capuchino late",
+  "description": "Vaso de café capuchino con escencia de late 355 ml",
+  "price": "60.00",
+  "category": "Otros",
+  "stock": "1000",
+  "image": "",
+  "sellerId": "2",
+  "sellerName": "Carlos Armando Grajeda",
+  "shipping_time": "1",
+  "shipping_unit": "Dias"
+}
+
+### Modificar producto
+PUT http://127.0.0.1:3000/api/Products/29
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDQ3MDA4LCJleHAiOjE3NzQwNTQyMDh9.Kj2m4SFol4jbhVxqabwm5VoXKQpoS9NSyTCcUcYf3wM
+Content-Type: application/json
+
+{
+  "name": "Cafe Capuchino late con escencia de vainilla",
+  "description": "Vaso de café capuchino con escencia de late 355 ml",
+  "price": "60.00",
+  "category": "Otros",
+  "stock": "120",
+  "image": "",
+  "shipping_time": "1",
+  "shipping_unit": "Dias"
+}
+
+### Listar productos
+GET http://127.0.0.1:3000/api/Products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
+Content-Type: application/json
+
+### Listar un producto
+GET http://127.0.0.1:3000/api/Products/25
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Mzk0MDkyOCwiZXhwIjoxNzczOTQ4MTI4fQ.PuD7LZ9dxb0yirC1nd82xLrtn41ObAHMPsdI19YBVDo
+Content-Type: application/json
+
+### Listar productos por vendedor
+GET http://127.0.0.1:3000/api/ProductsBySeller/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzczOTkwMDUyLCJleHAiOjE3NzM5OTcyNTJ9.KgS_Vjtzh1z3nYSc34lyPvDHwKFX7WMW8wY5LkCzUHE
+Content-Type: application/json
+
+### Eliminar un producto
+DELETE http://127.0.0.1:3000/api/Products/25
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Mzk0MDkyOCwiZXhwIjoxNzczOTQ4MTI4fQ.PuD7LZ9dxb0yirC1nd82xLrtn41ObAHMPsdI19YBVDo
+Content-Type: application/json

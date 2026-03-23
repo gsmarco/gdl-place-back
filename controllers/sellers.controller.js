@@ -17,6 +17,19 @@ exports.getSellers = async (req, res) => {
 
 };
 
+//getSellerByEmail
+exports.getSellerByEmail = async (req, res) => {
+
+    const { email } = req.params;
+
+    const result = await pool.query(
+        'SELECT * FROM sellers WHERE email = $1',
+        [email]
+    );
+
+    res.json(result.rows[0]);
+
+};
 
 exports.getSeller = async (req, res) => {
 

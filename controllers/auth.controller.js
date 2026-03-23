@@ -4,11 +4,12 @@ const jwt = require("jsonwebtoken");
 const { hashPassword, comparePassword } = require("../utils/hash");
 require('dotenv').config();
 
+const ssl_mode = process.env.DATABASE_SSL === 'true'; // convierte a boolean
+console.log(ssl_mode);
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false, // necesario para conexiones SSL en Neon
-    },
+    ssl: ssl_mode ? { rejectUnauthorized: false } : false,
 });
 
 module.exports = pool;
@@ -76,7 +77,7 @@ const login = async (req, res) => {
                 role: user.role
             },
             "secretkey",
-            { expiresIn: "2h" }
+            { expiresIn: "12h" }
         );
 
         // res.json({

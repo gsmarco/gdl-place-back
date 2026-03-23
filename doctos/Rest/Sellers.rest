@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Login y obtención del token
-POST http://localhost:3000/api/login
+POST https://gdl-place-backend.onrender.com/api/login
 Content-Type: application/json
 
 {
@@ -18,8 +18,18 @@ Content-Type: application/json
   "password": "Proyecto-VII-2026"
 }
 
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+
 ### Agregar usuario
-POST http://127.0.0.1:3000/api/register
+POST https://gdl-place-backend.onrender.com/api/register
 Content-Type: application/json
 
 {
@@ -28,6 +38,20 @@ Content-Type: application/json
   "password": "KarenRene",
   "role": "BUYER"
 }
+
+### LOCAL Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+### Listar datos de una tienda
+GET http://127.0.0.1:3000/api/sellerByEmail/cafe@mail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6IlNFTExFUiIsImlhdCI6MTc3NDA1NzYyNiwiZXhwIjoxNzc0MDY0ODI2fQ.GwCdZFZKmRnTKTd-jvM5KWjU45O0BB3ssy7OVogV7OM
+Content-Type: application/json
 
 ### Agregar seller
 POST http://127.0.0.1:3000/api/register

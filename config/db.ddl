@@ -16,6 +16,10 @@ CREATE TABLE public.users (
 	CONSTRAINT uq_users_email UNIQUE (email)
 );
 
+-- Insertamos el usuario con rol de ADMIN y con contraseña Proyecto-VII-2026
+INSERT INTO public.users ("name",email,"password","role",date_created) VALUES
+	 ('Administrador del sistema GDL-PLACE','admin.gdl-place@gdlplace.com','$2b$10$TiVUq84guf8W4GPXS5iLleoMlz/Ic/0PkozIc1MnqHp1b7tknSk8W','ADMIN','2026-03-14 14:28:46.683111-06');
+
 -- =================================================================================
 -- public.sellers definition
 
@@ -78,6 +82,12 @@ CREATE TABLE public.products (
 	shipping_time varchar(50) NULL,
 	shipping_unit varchar(50) NULL,
 	CONSTRAINT pk_products PRIMARY KEY (id)
+);
+
+CREATE TABLE product_images (
+  id SERIAL PRIMARY KEY,
+  product_id INT REFERENCES products(id) ON DELETE CASCADE,
+  image_url TEXT
 );
 
 -- =================================================================================
