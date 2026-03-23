@@ -74,7 +74,12 @@ Content-Type: application/json
   "shipping_unit": "Dias"
 }
 
-### Listar productos
+### Listar productos POstgreSQL Remoto
+GET https://gdl-place-backend.onrender.com/api/Products
+Content-Type: application/json
+
+
+### Listar productos PostgreSQl Local
 GET http://127.0.0.1:3000/api/Products
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
 Content-Type: application/json
