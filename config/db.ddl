@@ -42,6 +42,18 @@ CREATE TABLE public.sellers (
 	CONSTRAINT uq_sellers_email UNIQUE (email)
 );
 
+CREATE TABLE stores (
+  id SERIAL PRIMARY KEY,
+  seller_id INT NOT NULL,
+  store_name VARCHAR(255),
+  story_title VARCHAR(255),
+  story_content TEXT,
+  cover_image TEXT,
+  gallery_images TEXT[], 
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_seller FOREIGN KEY (seller_id) REFERENCES sellers(id)
+);
+
 -- =================================================================================
 -- public.categories definition
 

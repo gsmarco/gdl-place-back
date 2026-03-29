@@ -96,3 +96,23 @@ Content-Type: application/json
   "description": "Café artesanal",
   "password": "12345678"
 }
+
+### Agregar store
+GET http://127.0.0.1:3000/api/store/1
+
+### Agregar store
+POST http://127.0.0.1:3000/api/store
+Content-Type: application/json
+
+{
+  "seller_id": "2",
+  "store_name": "Cafe Central",
+  "story_title": "Juan Perez",
+  "story_content": "Aqui va un choro completo de como surgio la tienda",
+  "cover_image": "la pichancha.jpg",
+  "galery_images": [
+  "https://example.com/img1.jpg",
+  "https://example.com/img2.jpg",
+  "https://example.com/img3.jpg"
+]
+}

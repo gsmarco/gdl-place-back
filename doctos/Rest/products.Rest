@@ -85,12 +85,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiO
 Content-Type: application/json
 
 ### Listar un producto
-GET http://127.0.0.1:3000/api/Products/25
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Mzk0MDkyOCwiZXhwIjoxNzczOTQ4MTI4fQ.PuD7LZ9dxb0yirC1nd82xLrtn41ObAHMPsdI19YBVDo
+GET http://127.0.0.1:3000/api/Products/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzczOTkwMDUyLCJleHAiOjE3NzM5OTcyNTJ9.KgS_Vjtzh1z3nYSc34lyPvDHwKFX7WMW8wY5LkCzUHE
 Content-Type: application/json
 
 ### Listar productos por vendedor
-GET http://127.0.0.1:3000/api/ProductsBySeller/3
+GET http://127.0.0.1:3000/api/ProductsBySeller/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzczOTkwMDUyLCJleHAiOjE3NzM5OTcyNTJ9.KgS_Vjtzh1z3nYSc34lyPvDHwKFX7WMW8wY5LkCzUHE
 Content-Type: application/json
 

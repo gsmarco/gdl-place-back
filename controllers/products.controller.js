@@ -36,7 +36,7 @@ exports.getProductBySeller = async (req, res) => {
   const { id } = req.params;
 
   const result = await pool.query(
-    'SELECT * FROM products WHERE seller_id = $1',
+    'SELECT * FROM products WHERE seller_id = $1 order by name',
     [id]
   );
 
@@ -103,60 +103,6 @@ exports.createProduct = async (req, res) => {
     res.status(500).json({ message: 'Error al crear el producto' });
   }
 };
-//============================================================================
-
-// exports.createProduct = async (req, res) => {
-//     try {
-//         const {
-//             name,
-//             description,
-//             price,
-//             category,
-//             stock,
-//             image,
-//             sellerId,
-//             sellerName,
-//             shipping_time,
-//             shipping_unit
-//         } = req.body;
-
-//         const result = await pool.query(
-//             `INSERT INTO products
-//             ("name", description, price, category, stock, image, seller_id, seller_name, shipping_time, shipping_unit)
-//             VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)
-//             RETURNING *`,
-//             [
-//                 name,
-//                 description,
-//                 price,
-//                 category,
-//                 stock,
-//                 image,
-//                 sellerId,
-//                 sellerName,
-//                 shipping_time,
-//                 shipping_unit
-//             ]
-//         );
-
-//         const product = res.json(result.rows[0]);
-
-//         res.json(product);
-//     } catch (error) {
-//         console.error(error);
-
-//         if (error.code === '23505') {
-//             // Error de llave única
-//             return res.status(400).json({
-//                 message: 'Ya existe un producto con ese nombre para este vendedor'
-//             });
-//         }
-
-//         res.status(500).json({ message: 'Error al crear el producto' });
-//     } finally {
-//         pool.release();
-//     }
-// }
 
 exports.updateProduct = async (req, res) => {
 
