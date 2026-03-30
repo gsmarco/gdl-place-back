@@ -4,7 +4,7 @@ const upload = require('../middleware/upload');
 const controller = require('../controllers/products.controller');
 const verifyToken = require('../middleware/auth.middleware');
 
-router.post('/Products', verifyToken, controller.createProduct);
+router.post('/Products', upload, controller.createProduct);
 
 router.get('/Products', controller.getProducts);
 

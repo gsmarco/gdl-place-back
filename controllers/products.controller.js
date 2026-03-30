@@ -85,17 +85,24 @@ exports.createProduct = async (req, res) => {
 
     const productId = result.rows[0].id;
 
-    // 💾 guardar imágenes en otra tabla
-    for (let url of imageUrls) {
-      await pool.query(
-        'INSERT INTO product_images(product_id, image_url) VALUES($1,$2)',
-        [productId, url]
+    const imageNames = req.files
+  ? req.files.map(file => file.filename) 
+  : []; 
+
+
+    const savedImages = [];
+    for (let filename of imageNames) {
+      const imgResult = await pool.query(
+        'INSERT INTO product_images(product_id, image_url) VALUES($1, $2) RETURNING image_url',
+        [productId, filename]
       );
+      savedImages.push(imgResult.rows[0].image_url);
     }
 
-    res.json({
+    // 4. ✅ Respuesta final (Esto quita el 'pending' del navegador)
+    res.status(201).json({
       ...result.rows[0],
-      images: imageUrls
+      images: savedImages
     });
 
   } catch (error) {
