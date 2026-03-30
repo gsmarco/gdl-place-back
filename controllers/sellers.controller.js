@@ -90,7 +90,7 @@ exports.createSeller = async (req, res) => {
                 ownerName,
                 email,
                 pwd_encriptado,
-                'SELLER'
+                'seller'
             ]
         );
 

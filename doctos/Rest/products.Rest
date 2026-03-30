@@ -90,7 +90,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiO
 Content-Type: application/json
 
 ### Listar productos por vendedor
-GET http://127.0.0.1:3000/api/ProductsBySeller/4
+GET http://127.0.0.1:3000/api/ProductsBySeller/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzczOTkwMDUyLCJleHAiOjE3NzM5OTcyNTJ9.KgS_Vjtzh1z3nYSc34lyPvDHwKFX7WMW8wY5LkCzUHE
 Content-Type: application/json
 
