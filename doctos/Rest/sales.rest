@@ -1,0 +1,69 @@
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026"
+}
+
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+
+### LOCAL Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+
+### Grabar una venta
+POST http://127.0.0.1:3000/api/Sales
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTUzODcwMiwiZXhwIjoxNzc1NTgxOTAyfQ.SYUkpT2kyUkF-e6vZbf0z5KtxiEtz1Z2yJp84zIJenU
+Content-Type: application/json
+
+{
+  "total": 12999.99,
+  "buyer_id": 3,
+  "buyerName": "Carlos Armando Grajeda",
+  "buyerEmail": "tarless@gmail.com",
+  "buyerPhone": "555-123-4567",
+  "street": "Calle Zapotlan 2725",
+  "city": "Zapopan, Jalisco Mexico",
+  "state": "Jalisco",
+  "zipCode": "45199",
+  "country": "México",
+  "products": [
+      {
+      "id": 4,
+      "name": "Smartphone Pro Max",
+      "price": 999.99,
+      "quantity": 1,
+      "image": "Micrófono USB Condensador.jpg"
+      },
+      {
+      "id": 1,
+      "name": "Laptop HP Gaming Pro 5241",
+      "price": 12000.0,
+      "quantity": 1,
+      "image": "Laptop HP Gaming Pro 5241.png"
+      }
+  ],
+  "shipping": 15.00,
+  "date_sale": "2026-04-05",
+  "status": "pending",
+  "cardNumber":"5236 7898 5214 6187",
+  "cardName":"Marco Antonio González Solis",
+  "expiryDate": "03/26",
+  "cvv":"538"
+}

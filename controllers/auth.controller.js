@@ -40,7 +40,6 @@ const register = async (req, res) => {
 };
 
 const login = async (req, res) => {
-
     const { email, password } = req.body;
 
     try {
@@ -59,6 +58,8 @@ const login = async (req, res) => {
         }
 
         const user = result.rows[0];
+
+        // console.dir(user, { depth: null });
 
         const valid = await comparePassword(password, user.password);
 
@@ -80,12 +81,7 @@ const login = async (req, res) => {
             { expiresIn: "12h" }
         );
 
-        // res.json({
-        //     message: "Login correcto",
-        //     token
-        // });
-
-        // quitar password
+        // quitar password antes enviar el response
         delete user.password;
 
         res.json({

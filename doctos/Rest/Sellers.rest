@@ -48,7 +48,7 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-### Listar datos de una tienda
+### Listar datos de usuarios
 GET http://127.0.0.1:3000/api/sellerByEmail/cafe@mail.com
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6IlNFTExFUiIsImlhdCI6MTc3NDA1NzYyNiwiZXhwIjoxNzc0MDY0ODI2fQ.GwCdZFZKmRnTKTd-jvM5KWjU45O0BB3ssy7OVogV7OM
 Content-Type: application/json

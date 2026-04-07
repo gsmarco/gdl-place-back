@@ -109,27 +109,36 @@ CREATE TABLE product_images (
 
 -- DROP TABLE public.sales;
 
-CREATE TABLE public.sales (
-	id serial4 NOT NULL,
-	product_id int4 NULL,
-	product_name varchar(255) NULL,
-	quantity int4 NOT NULL,
-	total numeric(10, 2) NOT NULL,
-	buyer_name varchar(100) NULL,
-	buyer_email varchar(255) NULL,
-	buyer_phone varchar(50) NULL,
-	street varchar(255) NULL,
-	city varchar(100) NULL,
-	state varchar(100) NULL,
-	zip_code varchar(20) NULL,
-	country varchar(100) NULL,
-	"date" date NULL,
-	status varchar(20) NULL,
-	tracking_number varchar(100) NULL,
-	CONSTRAINT sales_pkey PRIMARY KEY (id),
-	CONSTRAINT sales_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id)
+CREATE TABLE sales (
+  id SERIAL PRIMARY KEY,
+  total NUMERIC(10,2) NOT NULL,
+  buyer_id INT,
+  buyer_name VARCHAR(150),
+  buyer_email VARCHAR(150),
+  buyer_phone VARCHAR(50),
+  street VARCHAR(255),
+  city VARCHAR(100),
+  state VARCHAR(100),
+  zip_code VARCHAR(20),
+  country VARCHAR(100),
+  date_sale DATE DEFAULT CURRENT_DATE,
+  status VARCHAR(20),
+  tracking_number VARCHAR(100)
 );
 
+-- =================================================================================
+-- Drop table
+
+-- DROP TABLE sale_products;
+CREATE TABLE sale_products (
+  id SERIAL PRIMARY KEY,
+  sale_id INT REFERENCES sales(id) ON DELETE CASCADE,
+  product_id INT,
+  product_name VARCHAR(255),
+  price NUMERIC(10,2),
+  quantity INT,
+  image VARCHAR(255)
+);
 -- =================================================================================
 -- public.cart_items definition
 

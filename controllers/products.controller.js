@@ -10,7 +10,9 @@ async function encryptPassword(plainPassword) {
 
 exports.getProducts = async (req, res) => {
 
-  const result = await pool.query('SELECT * FROM products');
+  const result = await pool.query(
+    "SELECT * FROM products order by name",
+  );
 
   res.json(result.rows);
 
@@ -36,13 +38,14 @@ exports.getProductBySeller = async (req, res) => {
   const { id } = req.params;
 
   const result = await pool.query(
-    'SELECT * FROM products WHERE seller_id = $1 order by name',
+    "SELECT * FROM products WHERE seller_id = $1 order by name",
     [id]
   );
 
   res.json(result.rows);
 
 };
+
 
 //============================================================================
 exports.createProduct = async (req, res) => {
@@ -53,6 +56,7 @@ exports.createProduct = async (req, res) => {
       price,
       category,
       stock,
+      image,
       sellerId,
       sellerName,
       shipping_time,
@@ -64,11 +68,15 @@ exports.createProduct = async (req, res) => {
       ? req.files.map(file => `/uploads/${file.filename}`)
       : [];
 
+    const imageNames = req.files
+      ? req.files.map(file => file.filename)
+      : [];
+
     // 🧠 guardar producto
     const result = await pool.query(
       `INSERT INTO products
-            ("name", description, price, category, stock, seller_id, seller_name, shipping_time, shipping_unit)
-            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+            ("name", description, price, category, stock, image, seller_id, seller_name, shipping_time, shipping_unit)
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9, $10)
             RETURNING *`,
       [
         name,
@@ -76,6 +84,7 @@ exports.createProduct = async (req, res) => {
         price,
         category,
         stock,
+        imageNames,
         sellerId,
         sellerName,
         shipping_time,
@@ -85,31 +94,19 @@ exports.createProduct = async (req, res) => {
 
     const productId = result.rows[0].id;
 
-    const imageNames = req.files
-  ? req.files.map(file => file.filename) 
-  : []; 
-
-
-    const savedImages = [];
-    for (let filename of imageNames) {
-      const imgResult = await pool.query(
-        'INSERT INTO product_images(product_id, image_url) VALUES($1, $2) RETURNING image_url',
-        [productId, filename]
-      );
-      savedImages.push(imgResult.rows[0].image_url);
-    }
-
     // 4. ✅ Respuesta final (Esto quita el 'pending' del navegador)
     res.status(201).json({
       ...result.rows[0],
-      images: savedImages
+      // images: savedImages
+      images: imageNames
     });
 
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Error al crear el producto' });
+    res.status(500).json({ message: 'Error al crear el producto: ' + error });
   }
 };
+
 
 exports.updateProduct = async (req, res) => {
 
@@ -125,6 +122,19 @@ exports.updateProduct = async (req, res) => {
     shipping_time,
     shipping_unit
   } = req.body;
+
+  // 📦 obtener imágenes desde multer
+  const imageUrls = req.files
+    ? req.files.map(file => `/uploads/${file.filename}`)
+    : [];
+
+  const imageNames = req.files
+    ? req.files.map(file => file.filename)
+    : [];
+
+  console.log("imageUrls: ", imageUrls);
+
+  console.log("imageNames: ", imageNames);
 
   const result = await pool.query(
     `UPDATE products SET
@@ -144,7 +154,7 @@ exports.updateProduct = async (req, res) => {
       price,
       category,
       stock,
-      image,
+      imageNames,
       shipping_time,
       shipping_unit,
       id
