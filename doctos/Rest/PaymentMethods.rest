@@ -40,29 +40,14 @@ Content-Type: application/json
     "isdefault": true
 }
 
-### Listar productos POstgreSQL Remoto
-GET https://gdl-place-backend.onrender.com/api/adre
-Content-Type: application/json
-
-
-### Listar productos PostgreSQl Local
-GET http://127.0.0.1:3000/api/address
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzc1ODUzNjEzLCJleHAiOjE3NzU4OTY4MTN9.6rDBc6QcfAtNwSlZueTr-nguwlza_6lxRJSjQIa8S_M
-Content-Type: application/json
-
-### Listar un producto
-GET http://127.0.0.1:3000/api/Products/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
-Content-Type: application/json
-
 ### Listar direcciones por usuario
 GET http://127.0.0.1:3000/api/MetodosPago/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0YXJsZXNzQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3NzYwNTY5ODgsImV4cCI6MTc3NjEwMDE4OH0.yIlX9sD_li52x3Kd0vxZM5c-018VmDQLDABv6VDZHZE
 Content-Type: application/json
 
 ### Listar direcciones por usuario
-GET http://127.0.0.1:3000/api/MetodosPagoByUser/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0YXJsZXNzQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3NzYwNTY5ODgsImV4cCI6MTc3NjEwMDE4OH0.yIlX9sD_li52x3Kd0vxZM5c-018VmDQLDABv6VDZHZE
+GET http://127.0.0.1:3000/api/MetodosPagoByUser/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0YXJsZXNzQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3NzYxMjQ4MzAsImV4cCI6MTc3NjE2ODAzMH0.cKDSodGiQYUy883IAjyhU-mC4z0N5Liu9C2CpVBjBBk
 Content-Type: application/json
 
 ### Modificar address

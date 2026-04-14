@@ -9,7 +9,7 @@ require('dotenv').config();
 // });
 
 let pool = new Pool();
-if (1 == 2) {
+if (1 == 1) {
     pool = new Pool({
         user: 'neondb_owner',
         host: 'ep-patient-brook-ai2qdtp3-pooler.c-4.us-east-1.aws.neon.tech',
