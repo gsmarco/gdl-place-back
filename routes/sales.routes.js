@@ -13,4 +13,8 @@ router.put('/sales/:id', verifyToken, sales.updateSale);
 
 router.delete('/sales/:id', verifyToken, sales.deleteSale);
 
+router.get('/estadisticas/:id', verifyToken, sales.estadisticas);
+
+router.get('/getOrdenes/:id', verifyToken, sales.getOrdenes);
+
 module.exports = router;

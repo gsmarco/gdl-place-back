@@ -67,3 +67,13 @@ Content-Type: application/json
   "expiryDate": "03/26",
   "cvv":"538"
 }
+
+### LEER ESTADISTICAS una venta
+GET http://127.0.0.1:3000/api/estadisticas/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTk1MjI3NiwiZXhwIjoxNzc1OTk1NDc2fQ.8frCPYF-tZZ8UjPk-U77P1w6_pq1NxkzWwAuRLXTFuQ
+Content-Type: application/json
+
+### Leer ordenes o pedidos
+GET http://127.0.0.1:3000/api/getOrdenes/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTk1MjI3NiwiZXhwIjoxNzc1OTk1NDc2fQ.8frCPYF-tZZ8UjPk-U77P1w6_pq1NxkzWwAuRLXTFuQ
+Content-Type: application/json

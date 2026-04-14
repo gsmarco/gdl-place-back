@@ -1,13 +1,5 @@
 const pool = require('../config/db');
 
-// Número de rondas de "salting" (entre 10 y 12 suele ser suficiente)
-const saltRounds = 10;
-
-async function encryptPassword(plainPassword) {
-  const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
-  return hashedPassword;
-}
-
 exports.getProducts = async (req, res) => {
 
   const result = await pool.query(

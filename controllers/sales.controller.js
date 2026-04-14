@@ -178,3 +178,67 @@ exports.deleteSale = async (req, res) => {
 
     res.json({ message: "Venta eliminada" });
 };
+
+exports.estadisticas = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const { rows } = await pool.query(`
+        select COUNT(*) AS num_compras, coalesce(SUM(total), 0) AS total_comprado, coalesce(ROUND(AVG(total), 2), 0) AS compra_promedio
+        FROM sales
+        WHERE buyer_id = $1
+    `, [id]);
+
+        res.json(rows[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Error obteniendo estadísticas" });
+    }
+};
+
+exports.getOrdenes = async (req, res) => {
+    try {
+        const { id } = req.params; // o req.user.id si usas auth
+
+        const query = `
+      SELECT 
+        json_build_object(
+          'id', s.id::text,
+          'date', s.date_sale,
+          'status', s.status,
+          'total', s.total,
+          'items', COALESCE((
+            SELECT json_agg(
+              json_build_object(
+                'name', sp.product_name,
+                'quantity', sp.quantity,
+                'price', sp.price,
+                'image', sp.image
+              )
+            )
+            FROM sale_products sp
+            WHERE sp.sale_id = s.id
+          ), '[]'::json),
+          'trackingNumber', COALESCE(s.trackingnumber, ''),
+          'shippingCarrier', COALESCE(s.shippingcarrier, ''),
+          'deliveryDate', COALESCE(s.deliverydate::text, '')
+        ) AS "order"
+      FROM sales s
+      WHERE s.buyer_id = $1
+      ORDER BY s.date_sale DESC;
+    `;
+
+        const result = await pool.query(query, [id]);
+
+        // 🔹 Extraer solo los objetos JSON
+        const orders = result.rows.map(row => row.order);
+
+        res.json(orders);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: 'Error al obtener órdenes'
+        });
+    }
+};
