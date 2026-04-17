@@ -1,0 +1,36 @@
+### LOCAL Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+### Grabar una venta
+POST http://127.0.0.1:3000/api/Store
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTUzODcwMiwiZXhwIjoxNzc1NTgxOTAyfQ.SYUkpT2kyUkF-e6vZbf0z5KtxiEtz1Z2yJp84zIJenU
+Content-Type: application/json
+
+{
+  "seller_id": 4,
+  "store_name": "MI BARRITA DE CAFE",
+  "story_title": "MIS INICIOS",
+  "story_content": "CONTENIDO",
+  "cover_image": "Escritorio Gaming RGB.jpg",
+  "gallery_images": [
+    "Micrófono USB Condensador.jpg",
+    "Tarjeta Gráfica RTX 4070.jpg",
+    "Escritorio Gaming RGB.jpg"
+  ],
+  "created_at": "2026-03-28T21:14:16.011Z",
+  "updated_at": "2026-04-15T03:59:32.505Z"
+}
+
+### Leer ordenes o pedidos
+GET http://127.0.0.1:3000/api/Store/3
+
+
+
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NjIyNzI5MSwiZXhwIjoxNzc2MjcwNDkxfQ.PczSDdFSn9-DR7Rkyg_liKifccn5wYyH8N5minFIiPo

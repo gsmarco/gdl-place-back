@@ -1,8 +1,5 @@
 const pool = require('../config/db');
 
-// Número de rondas de "salting" (entre 10 y 12 suele ser suficiente)
-const saltRounds = 10;
-
 exports.getSales = async (req, res) => {
 
     const result = await pool.query('SELECT * FROM Sales');

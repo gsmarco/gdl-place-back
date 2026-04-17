@@ -66,7 +66,7 @@ const login = async (req, res) => {
         if (!valid) {
 
             return res.status(401).json({
-                message: "Password incorrecto"
+                message: "Credenciales incorrectas"
             });
 
         }

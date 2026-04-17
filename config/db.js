@@ -21,13 +21,18 @@ if (1 == 1) {
         }
     });
 } else {
-    pool = new Pool({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'GDL-PLACE',
-        password: 'oLGA0322',
-        port: 5433,
-    });
+    try {
+        pool = new Pool({
+            user: 'postgres',
+            host: 'localhost',
+            database: 'GDL-PLACE',
+            password: 'oLGA0322',
+            port: 5433,
+        });
+
+    } catch (error) {
+
+    }
 }
 
 module.exports = pool;
