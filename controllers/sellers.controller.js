@@ -41,9 +41,7 @@ exports.getSeller = async (req, res) => {
     );
 
     res.json(result.rows[0]);
-
-};
-
+}
 
 exports.createSeller = async (req, res) => {
     try {
@@ -61,12 +59,11 @@ exports.createSeller = async (req, res) => {
 
         await pool.query('BEGIN');
 
-        const result = await pool.query(
-
+        const sellerResult = await pool.query(
             `INSERT INTO sellers
-    (bussines_name, owner_name, email, address, phone, city, category, description)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-    RETURNING *`,
+            (bussines_name, owner_name, email, address, phone, city, category, description)
+            VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+            RETURNING *`,
             [
                 businessName,
                 ownerName,
@@ -79,7 +76,7 @@ exports.createSeller = async (req, res) => {
             ]
         );
 
-        const seller = res.json(result.rows[0]);
+        const seller = sellerResult.rows[0];
 
         const pwd_encriptado = await encryptPassword(password);
 
@@ -97,14 +94,89 @@ exports.createSeller = async (req, res) => {
         await pool.query('COMMIT');
 
         res.json(seller);
+
     } catch (error) {
         await pool.query('ROLLBACK');
         console.error(error);
+
+        if (error.code === '23505') {
+            return res.status(400).json({
+                codigo: error.code,
+                constraint: error.constraint || "",
+                tabla: error.table,
+                error: 'Llave duplicada',
+                detail: error.detail
+            });
+        }
+
         res.status(500).json({ message: 'Error creating seller' });
-    } finally {
-        pool.release();
     }
-}
+};
+
+exports.createSeller_old = async (req, res) => {
+    try {
+        const {
+            businessName,
+            ownerName,
+            email,
+            address,
+            phone,
+            city,
+            category,
+            description,
+            password
+        } = req.body;
+
+        await pool.query('BEGIN');
+
+        let result = await pool.query(
+
+            `INSERT INTO sellers
+    (bussines_name, owner_name, email, address, phone, city, category, description)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+    RETURNING *`,
+            [
+                businessName,
+                ownerName,
+                email,
+                address,
+                phone,
+                city,
+                category,
+                description
+            ]
+        );
+
+        const seller = result.rows[0];
+
+        const pwd_encriptado = await encryptPassword(password);
+
+        result = await pool.query(
+            `INSERT INTO users (name, email, password, role)
+             VALUES ($1,$2,$3,$4)`,
+            [
+                ownerName,
+                email,
+                pwd_encriptado,
+                'seller'
+            ]
+        );
+
+        await pool.query('COMMIT');
+
+        res.json(seller);
+    } catch (error) {
+        await pool.query('ROLLBACK');
+        console.error(error);
+        if (error.code === '23505') {
+            return res.status(400).json({
+                error: 'Registro duplicado',
+                detail: error.detail // aquí viene info como: Key (email)=(...) already exists
+            });
+        }
+        res.status(500).json({ message: 'Error creating seller' });
+    }
+};
 
 exports.updateSeller = async (req, res) => {
 
@@ -164,3 +236,4 @@ exports.deleteSeller = async (req, res) => {
 
     res.json({ message: "Seller eliminado" });
 };
+

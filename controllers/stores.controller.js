@@ -95,18 +95,18 @@ exports.getStore = async (req, res) => {
 
 
 //===============================================================
-exports.getStore_old = async (req, res) => {
+// exports.getStore_old = async (req, res) => {
 
-    const { id } = req.params;
+//     const { id } = req.params;
 
-    const result = await pool.query(
-        'SELECT * FROM stores WHERE seller_id = $1',
-        [id]
-    );
+//     const result = await pool.query(
+//         'SELECT * FROM stores WHERE seller_id = $1',
+//         [id]
+//     );
 
-    res.json(result.rows[0]);
+//     res.json(result.rows[0]);
 
-};
+// };
 
 const normalizePath = (path) => {
     if (!path) return path;

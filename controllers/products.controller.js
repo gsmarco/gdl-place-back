@@ -56,12 +56,8 @@ exports.createProduct = async (req, res) => {
     } = req.body;
 
     // 📦 obtener imágenes desde multer
-    const imageUrls = req.files
-      ? req.files.map(file => `/uploads/${file.filename}`)
-      : [];
-
     const imageNames = req.files
-      ? req.files.map(file => file.filename)
+      ? req.files.map(file => `/uploads/${file.filename}`)
       : [];
 
     // 🧠 guardar producto
@@ -115,16 +111,14 @@ exports.updateProduct = async (req, res) => {
     shipping_unit
   } = req.body;
 
-  // 📦 obtener imágenes desde multer
-  const imageUrls = req.files
+  // const existing = JSON.parse(req.body.existingImages || "[]");
+  // const newFiles = req.files;
+  // const newUrls = newFiles.map(file => "/uploads/" + file.filename);
+
+  // obtener imágenes desde multer
+  const imageNames = req.files
     ? req.files.map(file => `/uploads/${file.filename}`)
     : [];
-
-  const imageNames = req.files
-    ? req.files.map(file => file.filename)
-    : [];
-
-  console.log("imageUrls: ", imageUrls);
 
   console.log("imageNames: ", imageNames);
 
