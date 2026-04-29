@@ -77,3 +77,18 @@ Content-Type: application/json
 GET http://127.0.0.1:3000/api/getOrdenes/4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTk1MjI3NiwiZXhwIjoxNzc1OTk1NDc2fQ.8frCPYF-tZZ8UjPk-U77P1w6_pq1NxkzWwAuRLXTFuQ
 Content-Type: application/json
+
+### Leer ordenes o pedidos
+GET http://127.0.0.1:3000/api/getVentas/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NzI2ODc3MCwiZXhwIjoxNzc3MzExOTcwfQ._ZKr5LiPJM9-7_2kcfW2QHx1Ov6QdKVztmJY34LUSO4
+Content-Type: application/json
+
+### Leer ordenes o pedidos
+GET http://127.0.0.1:3000/api/tendenciasVentas/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NzIyMTkxOCwiZXhwIjoxNzc3MjY1MTE4fQ.wRA2h4XRS4vHoHuPmivkVuufNjpy0BJE-r2UmuSIlWY
+Content-Type: application/json
+
+### Leer ordenes o pedidos
+GET http://127.0.0.1:3000/api/productosMasVendidos/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NzM5ODIzNCwiZXhwIjoxNzc3NDQxNDM0fQ.UP4YdojdCpOxI0Ql5NAqDINJDRnCqJ1XXQoz3x5AVoU
+Content-Type: application/json

@@ -239,3 +239,161 @@ exports.getOrdenes = async (req, res) => {
         });
     }
 };
+
+exports.getVentas = async (req, res) => {
+    const { id } = req.params;
+
+    const query = `
+    SELECT 
+      prod.seller_id, s.buyer_id, s.id AS sale_id, s.total, s.buyername, s.buyeremail, s.buyerphone,
+      s.street, s.city, s.state, s.zipcode, s.country,
+      s.date_sale, s.status, s.trackingnumber,
+      sp.id AS product_id, sp.product_name, sp.price, sp.quantity, sp.image
+    FROM sales s
+    LEFT JOIN sale_products sp ON sp.sale_id = s.id
+    left join products prod on sp.product_id = prod.id
+    WHERE prod.seller_id=$1
+    `;
+
+    try {
+        const result = await pool.query(query, [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "No se encontraron ventas" });
+        }
+
+        // Usamos un objeto normal como mapa
+        const salesMap = {};
+
+        result.rows.forEach(r => {
+            if (!salesMap[r.sale_id]) {
+                salesMap[r.sale_id] = {
+                    saleId: r.sale_id,
+                    productId: r.product_id,
+                    productName: r.product_name,
+                    quantity: r.quantity,
+                    total: parseFloat(r.total),
+                    buyerName: r.buyername,
+                    buyerEmail: r.buyeremail,
+                    buyerPhone: r.buyerphone,
+                    shippingAddress: {
+                        street: r.street,
+                        city: r.city,
+                        state: r.state,
+                        zipCode: r.zipcode,
+                        country: r.country,
+                    },
+                    date: r.date_sale,
+                    status: r.status,
+                    trackingNumber: r.trackingnumber,
+                    products: []
+                };
+            }
+
+            // Agregamos cada producto al array
+            salesMap[r.sale_id].products.push({
+                id: r.product_id,
+                name: r.product_name,
+                price: parseFloat(r.price),
+                quantity: r.quantity,
+                image: r.image
+            });
+        });
+
+        // Convertimos el objeto en array
+        const sales = Object.values(salesMap);
+
+        res.json(sales);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error al obtener las ventas");
+    }
+};
+
+exports.getVentasTendencias = async (req, res) => {
+    const { id } = req.params;
+
+    const query = `
+        SELECT 
+        TO_CHAR(date_sale, 'DD Mon') AS fecha,
+        SUM(total) AS ventas,
+        COUNT(*) AS ordenes
+        FROM public.sales s
+        LEFT JOIN sale_products sp ON sp.sale_id = s.id
+        left join products prod on sp.product_id = prod.id
+        where prod.seller_id = $1
+        GROUP BY date_sale
+        ORDER BY date_sale;
+    `;
+
+    try {
+        const result = await pool.query(query, [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "No se encontraron ventas" });
+        }
+
+        // Response
+        const Data = result.rows.map(r => ({
+            fecha: r.fecha,
+            ventas: Number(r.ventas),
+            ordenes: Number(r.ordenes)
+        }));
+        // res.json(result.rows);
+        res.json(Data);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error al obtener las tendencias de ventas");
+    }
+};
+
+exports.getProductosMasVendidos = async (req, res) => {
+    const { id } = req.params;
+
+    const query = `
+        SELECT 
+        cat."name",
+        SUM(total)::decimal(12,2) AS ventas,
+        COUNT(*)::int AS ordenes,
+        cat.graphic_color
+        FROM public.sales s
+        LEFT JOIN sale_products sp ON sp.sale_id = s.id
+        left join products prod on sp.product_id = prod.id
+        left join categories cat on prod.category = cat."name"
+        where prod.seller_id = $1
+        GROUP BY cat."name", graphic_color 
+        ORDER BY cat."name";
+    `;
+
+    try {
+        const result = await pool.query(query, [id]);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ message: "No se encontraron ventas" });
+        }
+
+        // Response
+        let totalOrdenes = 0;
+        result.rows.forEach(r => {
+            totalOrdenes += Number(r.ordenes);
+        });
+
+        // const Data = result.rows.map(r => ({
+        //     name: r.name,
+        //     value: (Number(r.ordenes * 100) / totalOrdenes).toFixed(2),
+        //     color: r.graphic_color
+        // }));
+
+        const Data = result.rows.map(r => ({
+            name: r.name,
+            value: Number(((r.ordenes * 100) / totalOrdenes).toFixed(2)),
+            color: r.graphic_color
+        }));
+        res.json(Data);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error al obtener las tendencias de ventas");
+    }
+};

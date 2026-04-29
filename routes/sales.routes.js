@@ -17,4 +17,10 @@ router.get('/estadisticas/:id', verifyToken, sales.estadisticas);
 
 router.get('/getOrdenes/:id', verifyToken, sales.getOrdenes);
 
+router.get('/getVentas/:id', verifyToken, sales.getVentas);
+
+router.get('/tendenciasVentas/:id', verifyToken, sales.getVentasTendencias);
+
+router.get('/ProductosMasVendidos/:id', verifyToken, sales.getProductosMasVendidos);
+
 module.exports = router;
