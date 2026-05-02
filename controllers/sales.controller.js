@@ -1,5 +1,6 @@
 const pool = require('../config/db');
 
+// Listado de ventas generales
 exports.getSales = async (req, res) => {
 
     const result = await pool.query('SELECT * FROM Sales');
@@ -245,7 +246,7 @@ exports.getVentas = async (req, res) => {
 
     const query = `
     SELECT 
-      prod.seller_id, s.buyer_id, s.id AS sale_id, s.total, s.buyername, s.buyeremail, s.buyerphone,
+      prod.seller_id, s.buyer_id, s.id, s.total, s.buyername, s.buyeremail, s.buyerphone,
       s.street, s.city, s.state, s.zipcode, s.country,
       s.date_sale, s.status, s.trackingnumber,
       sp.id AS product_id, sp.product_name, sp.price, sp.quantity, sp.image
@@ -266,9 +267,9 @@ exports.getVentas = async (req, res) => {
         const salesMap = {};
 
         result.rows.forEach(r => {
-            if (!salesMap[r.sale_id]) {
-                salesMap[r.sale_id] = {
-                    saleId: r.sale_id,
+            if (!salesMap[r.id]) {
+                salesMap[r.id] = {
+                    id: r.id,
                     productId: r.product_id,
                     productName: r.product_name,
                     quantity: r.quantity,
@@ -291,7 +292,7 @@ exports.getVentas = async (req, res) => {
             }
 
             // Agregamos cada producto al array
-            salesMap[r.sale_id].products.push({
+            salesMap[r.id].products.push({
                 id: r.product_id,
                 name: r.product_name,
                 price: parseFloat(r.price),
@@ -377,13 +378,7 @@ exports.getProductosMasVendidos = async (req, res) => {
         let totalOrdenes = 0;
         result.rows.forEach(r => {
             totalOrdenes += Number(r.ordenes);
-        });
-
-        // const Data = result.rows.map(r => ({
-        //     name: r.name,
-        //     value: (Number(r.ordenes * 100) / totalOrdenes).toFixed(2),
-        //     color: r.graphic_color
-        // }));
+        })
 
         const Data = result.rows.map(r => ({
             name: r.name,

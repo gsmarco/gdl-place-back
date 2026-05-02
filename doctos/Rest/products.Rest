@@ -94,6 +94,11 @@ GET http://127.0.0.1:3000/api/ProductsBySeller/3
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
 Content-Type: application/json
 
+### Listar productos por vendedor
+GET http://127.0.0.1:3000/api/Products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
+Content-Type: application/json
+
 ### Eliminar un producto
 DELETE http://127.0.0.1:3000/api/Products/300
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Mzk0MDkyOCwiZXhwIjoxNzczOTQ4MTI4fQ.PuD7LZ9dxb0yirC1nd82xLrtn41ObAHMPsdI19YBVDo
