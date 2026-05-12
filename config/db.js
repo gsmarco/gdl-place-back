@@ -1,38 +1,38 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-// const pool = new Pool({
-//     connectionString: process.env.DATABASE_URL,
-//     ssl: {
-//         rejectUnauthorized: false, // necesario para conexiones SSL en Neon
-//     },
-// });
-
 let pool = new Pool();
-if (1 == 1) {
+try {
+    const ssl_mode = process.env.DATABASE_SSL === 'true'; // convierte a boolean
+    console.log(ssl_mode);
+
     pool = new Pool({
-        user: 'neondb_owner',
-        host: 'ep-patient-brook-ai2qdtp3-pooler.c-4.us-east-1.aws.neon.tech',
-        database: 'neondb',
-        password: 'npg_IUFih1jy6cQZ',
-        port: 5432,
-        ssl: {
-            rejectUnauthorized: false
-        }
+        connectionString: process.env.DATABASE_URL,
+        ssl: ssl_mode ? { rejectUnauthorized: false } : false,
     });
-} else {
-    try {
-        pool = new Pool({
-            user: 'postgres',
-            host: 'localhost',
-            database: 'GDL-PLACE',
-            password: 'oLGA0322',
-            port: 5433,
-        });
 
-    } catch (error) {
-
-    }
+} catch (error) {
+    console.log("Error al conectarse al servidor de base de datos", error.message);
 }
+
+// Captura errores inesperados del pool
+pool.on('error', (err) => {
+    console.error('Error inesperado en el pool:', err.message);
+});
+
+
+// Verifica conexión inicial
+(async () => {
+    try {
+        const row = await pool.query('SELECT version() as version');
+        console.log('Conexión inicial a PostgreSQL exitosa');
+        console.log('Versión: ' + row.rows[0].version);
+        console.log("Conectado a DB:", process.env.DATABASE_URL);
+    } catch (error) {
+        console.error('No se pudo conectar al servidor de PostgreSQL:', error.message);
+        // Opcional: detener la app si la DB es crítica
+        // process.exit(1);
+    }
+})();
 
 module.exports = pool;

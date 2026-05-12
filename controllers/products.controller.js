@@ -1,41 +1,67 @@
 const pool = require('../config/db');
 
 exports.getProducts = async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM products order by name",
+    );
 
-  const result = await pool.query(
-    "SELECT * FROM products order by name",
-  );
+    res.json(result.rows);
 
-  res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: 'Error al obtener productos',
+      error: error.message
+    });
+
+  }
 
 };
 
 
 exports.getProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  const { id } = req.params;
+    const result = await pool.query(
+      'SELECT * FROM products WHERE id = $1',
+      [id]
+    );
 
-  const result = await pool.query(
-    'SELECT * FROM products WHERE id = $1',
-    [id]
-  );
+    res.json(result.rows[0]);
 
-  res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
 
+    res.status(500).json({
+      message: 'Error al obtener productos',
+      error: error.message
+    });
+  }
 };
 
 
 exports.getProductBySeller = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  const { id } = req.params;
+    const result = await pool.query(
+      "SELECT * FROM products WHERE seller_id = $1 order by name",
+      [id]
+    );
 
-  const result = await pool.query(
-    "SELECT * FROM products WHERE seller_id = $1 order by name",
-    [id]
-  );
+    res.json(result.rows);
 
-  res.json(result.rows);
+  } catch (error) {
+    console.error(error);
 
+    res.status(500).json({
+      message: 'Error al obtener productos',
+      error: error.message
+    });
+  }
 };
 
 
@@ -57,7 +83,7 @@ exports.createProduct = async (req, res) => {
 
     // 📦 obtener imágenes desde multer
     const imageNames = req.files
-      ? req.files.map(file => `/uploads/${file.filename}`)
+      ? req.files.map(file => `/uploads/${file.path}`)
       : [];
 
     // 🧠 guardar producto
@@ -97,7 +123,6 @@ exports.createProduct = async (req, res) => {
 
 
 exports.updateProduct = async (req, res) => {
-
   const { id } = req.params;
 
   const {
@@ -111,19 +136,20 @@ exports.updateProduct = async (req, res) => {
     shipping_unit
   } = req.body;
 
-  // const existing = JSON.parse(req.body.existingImages || "[]");
-  // const newFiles = req.files;
-  // const newUrls = newFiles.map(file => "/uploads/" + file.filename);
+  try {
+    // const existing = JSON.parse(req.body.existingImages || "[]");
+    // const newFiles = req.files;
+    // const newUrls = newFiles.map(file => "/uploads/" + file.filename);
 
-  // obtener imágenes desde multer
-  const imageNames = req.files
-    ? req.files.map(file => `/uploads/${file.filename}`)
-    : [];
+    // obtener imágenes desde multer
+    const imageNames = req.files
+      ? req.files.map(file => `${file.path}`)
+      : [];
 
-  console.log("imageNames: ", imageNames);
+    console.log("imageNames: ", imageNames);
 
-  const result = await pool.query(
-    `UPDATE products SET
+    const result = await pool.query(
+      `UPDATE products SET
         name=$1,
         description=$2,
         price=$3,
@@ -134,32 +160,47 @@ exports.updateProduct = async (req, res) => {
         shipping_unit=$8
         WHERE id=$9
         RETURNING *`,
-    [
-      name,
-      description,
-      price,
-      category,
-      stock,
-      imageNames,
-      shipping_time,
-      shipping_unit,
-      id
-    ]
-  );
+      [
+        name,
+        description,
+        price,
+        category,
+        stock,
+        imageNames,
+        shipping_time,
+        shipping_unit,
+        id
+      ]
+    );
 
-  res.json(result.rows[0]);
+    res.json(result.rows[0]);
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      message: 'Error al obtener productos',
+      error: error.message
+    });
+
+  }
+
 
 };
 
 
 exports.deleteProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
 
-  const { id } = req.params;
+    await pool.query(
+      'DELETE FROM products WHERE id=$1',
+      [id]
+    );
 
-  await pool.query(
-    'DELETE FROM products WHERE id=$1',
-    [id]
-  );
+    res.json({ message: "Producto eliminado" });
 
-  res.json({ message: "Producto eliminado" });
+  } catch (error) {
+
+  }
 };
