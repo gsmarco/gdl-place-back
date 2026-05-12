@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const router = Router();
-
 const upload = require('../middleware/upload');
 const controller = require('../controllers/products.controller');
 const verifyToken = require('../middleware/auth.middleware');

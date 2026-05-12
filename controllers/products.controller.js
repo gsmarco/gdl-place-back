@@ -83,7 +83,7 @@ exports.createProduct = async (req, res) => {
 
     // 📦 obtener imágenes desde multer
     const imageNames = req.files
-      ? req.files.map(file => `/uploads/${file.path}`)
+      ? req.files.map(file => `${file.path}`)
       : [];
 
     // 🧠 guardar producto

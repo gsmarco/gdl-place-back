@@ -7,7 +7,7 @@ Content-Type: application/json
   "password": "12345678"
 }
 
-### Grabar una venta
+### Grabar datos de una tienda
 POST http://127.0.0.1:3000/api/Store
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NTUzODcwMiwiZXhwIjoxNzc1NTgxOTAyfQ.SYUkpT2kyUkF-e6vZbf0z5KtxiEtz1Z2yJp84zIJenU
 Content-Type: application/json
@@ -29,8 +29,4 @@ Content-Type: application/json
 
 ### Leer ordenes o pedidos
 GET http://127.0.0.1:3000/api/Store/3
-
-
-
-
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTc3NjIyNzI5MSwiZXhwIjoxNzc2MjcwNDkxfQ.PczSDdFSn9-DR7Rkyg_liKifccn5wYyH8N5minFIiPo

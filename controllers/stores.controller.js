@@ -1,10 +1,5 @@
 const pool = require('../config/db');
-const upload = require('../middleware/upload');
 
-// routes/store.js
-const express = require("express");
-
-//===========================================================================
 exports.createStore = async (req, res) => {
     const client = await pool.connect();
 
@@ -19,10 +14,10 @@ exports.createStore = async (req, res) => {
         const cover = req.files?.cover_image?.[0];
         const gallery = req.files?.gallery_images || [];
 
-        const coverPath = cover ? `/uploads/${cover.filename}` : null;
+        const coverPath = cover ? `${cover.path}` : null;
 
         const galleryPaths = gallery.map((img) => {
-            return `/uploads/${img.filename}`;
+            return `${img.path}`;
         });
 
         const query = `
@@ -93,21 +88,6 @@ exports.getStore = async (req, res) => {
     }
 };
 
-
-//===============================================================
-// exports.getStore_old = async (req, res) => {
-
-//     const { id } = req.params;
-
-//     const result = await pool.query(
-//         'SELECT * FROM stores WHERE seller_id = $1',
-//         [id]
-//     );
-
-//     res.json(result.rows[0]);
-
-// };
-
 const normalizePath = (path) => {
     if (!path) return path;
 
@@ -148,7 +128,7 @@ exports.updateStore = async (req, res) => {
         let coverPath = currentStore.cover_image;
 
         if (cover) {
-            coverPath = `/uploads/${cover.filename}`;
+            coverPath = `${cover.path}`;
         }
 
         // ============================
@@ -175,7 +155,7 @@ exports.updateStore = async (req, res) => {
 
         // 🔹 nuevas imágenes
         const newGalleryPaths = gallery.map((img) => {
-            return `/uploads/${img.filename}`;
+            return `${img.path}`;
         });
 
         const finalGallery = [...parsedExisting, ...newGalleryPaths];
