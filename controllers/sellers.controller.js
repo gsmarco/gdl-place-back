@@ -81,12 +81,13 @@ exports.createSeller = async (req, res) => {
         const pwd_encriptado = await encryptPassword(password);
 
         await pool.query(
-            `INSERT INTO users (name, email, password, role)
-             VALUES ($1,$2,$3,$4)`,
+            `INSERT INTO users (name, email, password, phone, role)
+             VALUES ($1,$2,$3,$4,$5)`,
             [
                 ownerName,
                 email,
                 pwd_encriptado,
+                phone,
                 'seller'
             ]
         );
@@ -111,72 +112,7 @@ exports.createSeller = async (req, res) => {
 
         res.status(500).json({ message: 'Error creating seller' });
     }
-};
-
-exports.createSeller_old = async (req, res) => {
-    try {
-        const {
-            businessName,
-            ownerName,
-            email,
-            address,
-            phone,
-            city,
-            category,
-            description,
-            password
-        } = req.body;
-
-        await pool.query('BEGIN');
-
-        let result = await pool.query(
-
-            `INSERT INTO sellers
-    (bussines_name, owner_name, email, address, phone, city, category, description)
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
-    RETURNING *`,
-            [
-                businessName,
-                ownerName,
-                email,
-                address,
-                phone,
-                city,
-                category,
-                description
-            ]
-        );
-
-        const seller = result.rows[0];
-
-        const pwd_encriptado = await encryptPassword(password);
-
-        result = await pool.query(
-            `INSERT INTO users (name, email, password, role)
-             VALUES ($1,$2,$3,$4)`,
-            [
-                ownerName,
-                email,
-                pwd_encriptado,
-                'seller'
-            ]
-        );
-
-        await pool.query('COMMIT');
-
-        res.json(seller);
-    } catch (error) {
-        await pool.query('ROLLBACK');
-        console.error(error);
-        if (error.code === '23505') {
-            return res.status(400).json({
-                error: 'Registro duplicado',
-                detail: error.detail // aquí viene info como: Key (email)=(...) already exists
-            });
-        }
-        res.status(500).json({ message: 'Error creating seller' });
-    }
-};
+}
 
 exports.updateSeller = async (req, res) => {
 

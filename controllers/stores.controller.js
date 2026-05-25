@@ -131,20 +131,6 @@ exports.updateStore = async (req, res) => {
             coverPath = `${cover.path}`;
         }
 
-        // ============================
-        // 📌 GALERÍA
-        // ============================
-
-        // 🔹 imágenes existentes (vienen del frontend como JSON string)
-
-        // let parsedExisting = [];
-
-        // if (existing_images) {
-        //     parsedExisting = JSON.parse(existing_images);
-        // } else {
-        //     parsedExisting = currentStore.gallery_images || [];
-        // }
-
         let parsedExisting = [];
 
         if (existing_images) {

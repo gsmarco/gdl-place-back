@@ -6,6 +6,7 @@ const verifyToken = require('../middleware/auth.middleware');
 
 router.post(
     '/Products',
+    verifyToken,
     upload.array('images', 10),
     controller.createProduct
 );
