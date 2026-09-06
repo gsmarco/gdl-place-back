@@ -1,0 +1,61 @@
+### Backend local
+### Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "tarless@gmail.com",
+  "password": "12345678"
+}
+
+### Agregar address
+POST http://127.0.0.1:3000/api/address
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzc1NzgxMjUxLCJleHAiOjE3NzU4MjQ0NTF9.WFZd9EFCcki21Zx7UMQtHSIFiNvcFNEcnyE1oUWB9V8
+Content-Type: application/json
+
+{
+    "id_user": 3,
+    "tipo": "Trabajo",
+    "street": "Penitenciaria 225",
+    "neighborhood": "Centro",
+    "city": "Guadalajara",
+    "state": "Jalisco",
+    "zipcode": "44100",
+    "isdefault": true
+}
+
+### Modificar address
+PUT http://127.0.0.1:3000/api/address/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzc1NzgxMjUxLCJleHAiOjE3NzU4MjQ0NTF9.WFZd9EFCcki21Zx7UMQtHSIFiNvcFNEcnyE1oUWB9V8
+Content-Type: application/json
+
+{
+    "id_user": 3,
+    "tipo": "Casa",
+    "street": "Lopez Mateos 3225",
+    "neighborhood": "La Calma",
+    "city": "Zapopan",
+    "state": "Jalisco",
+    "zipcode": "45200",
+    "isdefault": true
+}
+
+### Listar productos POstgreSQL Remoto
+GET https://gdl-place-backend.onrender.com/api/adre
+Content-Type: application/json
+
+
+### Listar productos PostgreSQl Local
+GET http://127.0.0.1:3000/api/address
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzc1ODUzNjEzLCJleHAiOjE3NzU4OTY4MTN9.6rDBc6QcfAtNwSlZueTr-nguwlza_6lxRJSjQIa8S_M
+Content-Type: application/json
+
+### Listar un producto
+GET http://127.0.0.1:3000/api/Products/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJhZG1pbi5nZGwtcGxhY2VAZ2RscGxhY2UuY29tIiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzc0MDc5MTg2LCJleHAiOjE3NzQwODYzODZ9.10RYZ-GBQOkFYd42vYiW5Pl5A3pK0hlF5D-_dFuAsfA
+Content-Type: application/json
+
+### Listar direcciones por usuario
+GET http://127.0.0.1:3000/api/addressByUser/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJ0YXJsZXNzQGdtYWlsLmNvbSIsInJvbGUiOiJzZWxsZXIiLCJpYXQiOjE3NzYwNTEwMzgsImV4cCI6MTc3NjA5NDIzOH0.KerZU-eew4R0Gen95OeXFa0dDGYEoVFkZ7m4oKlTvTc
+Content-Type: application/json

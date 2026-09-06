@@ -1,0 +1,128 @@
+### Agregar admionistrador
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Administrador del sistema GDL-PLACE",
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026",
+  "role": "ADMIN"
+}
+
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "admin.gdl-place@gdlplace.com",
+  "password": "Proyecto-VII-2026"
+}
+
+### Login y obtención del token
+POST https://gdl-place-backend.onrender.com/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+
+### Agregar usuario
+POST https://gdl-place-backend.onrender.com/api/register
+Content-Type: application/json
+
+{
+  "name": "Zulema Barragán Ríos",
+  "email": "zulema.barragan@gmail.com",
+  "password": "KarenRene",
+  "role": "BUYER"
+}
+
+### Actualiza usuario
+PUT http://127.0.0.1:3000/api/users/4
+Content-Type: application/json
+
+{
+  "name": "Zulema Barragán Ríos",
+  "email": "zulema.barragan@gmail.com",
+  "phone": "33 1020 3040"
+}
+
+### LOCAL Login y obtención del token
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{
+  "email": "cafe@mail.com",
+  "password": "12345678"
+}
+
+### Listar datos de usuarios
+GET http://127.0.0.1:3000/api/sellerByEmail/cafe@mail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjYWZlQG1haWwuY29tIiwicm9sZSI6IlNFTExFUiIsImlhdCI6MTc3NDA1NzYyNiwiZXhwIjoxNzc0MDY0ODI2fQ.GwCdZFZKmRnTKTd-jvM5KWjU45O0BB3ssy7OVogV7OM
+Content-Type: application/json
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/register
+Content-Type: application/json
+
+{
+  "name": "Marco Antonio González Solis",
+  "email": "dicomys@hotmail.com",
+  "password": "Olga0322",
+  "role": "ADMIN"
+}
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/sellers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTUsImVtYWlsIjoiYWRtaW4uZ2RsLXBsYWNlQGdkbHBsYWNlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3MzU5Njk3OCwiZXhwIjoxNzczNjA0MTc4fQ.btGN6lXMrgkgpFLuXm6MdODyJL95IThvXwv0HfnZWnA
+
+{
+  "bussines_name": "Cafe Central",
+  "owner_name": "Juan Perez",
+  "email": "cafe@mail.com",
+  "password": "12345678",
+  "address": "Av Juarez 120",
+  "phone": "3312345678",
+  "city": "Guadalajara",
+  "category": "Cafeteria",
+  "description": "Café artesanal"
+}
+
+### Agregar seller
+POST http://127.0.0.1:3000/api/sellers
+Content-Type: application/json
+
+{
+  "businessName": "Cafe Central",
+  "ownerName": "Juan Perez",
+  "email": "cafe@mail.com",
+  "address": "Av Juarez 120",
+  "phone": "3312345678",
+  "city": "Guadalajara",
+  "category": "Cafeteria",
+  "description": "Café artesanal",
+  "password": "12345678"
+}
+
+### Agregar store
+GET http://127.0.0.1:3000/api/store/1
+
+### Agregar store
+POST http://127.0.0.1:3000/api/store
+Content-Type: application/json
+
+{
+  "seller_id": "2",
+  "store_name": "Cafe Central",
+  "story_title": "Juan Perez",
+  "story_content": "Aqui va un choro completo de como surgio la tienda",
+  "cover_image": "la pichancha.jpg",
+  "galery_images": [
+  "https://example.com/img1.jpg",
+  "https://example.com/img2.jpg",
+  "https://example.com/img3.jpg"
+]
+}

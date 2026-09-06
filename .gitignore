@@ -19,6 +19,12 @@ lerna-debug.log*
 /coverage
 /.nyc_output
 
+<<<<<<< HEAD
+=======
+# Imagenes
+uploads/
+
+>>>>>>> 4ca299db76a417b48679339a9dea01cfa2d4a9ab
 # IDEs and editors
 /.idea
 .project
